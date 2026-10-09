@@ -1,0 +1,71 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   WARNA: ganti di sini untuk mengubah tampilan seluruh website
+   ============================================================ */
+:root {
+  --paper: #f2f5f9;      /* latar halaman */
+  --surface: #ffffff;    /* latar kotak/tombol sekunder */
+  --ink: #0f1a2e;        /* teks utama */
+  --muted: #56637a;      /* teks sekunder */
+  --line: #d5dce7;       /* garis pemisah */
+  --brand: #d93a14;      /* warna aksen (tautan, hover) */
+}
+.dark {
+  --paper: #0d1524;
+  --surface: #142036;
+  --ink: #e8edf5;
+  --muted: #9aa8bf;
+  --line: #25344e;
+  --brand: #ff7a52;
+}
+
+@theme inline {
+  --font-display: "Newsreader", Georgia, serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+}
+
+@theme {
+  --animate-rise: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-breathe: breathe 7s ease-in-out infinite;
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  ::selection { background: var(--brand); color: var(--paper); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
